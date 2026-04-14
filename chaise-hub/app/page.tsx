@@ -3,7 +3,7 @@ export default function Home() {
     {
       id: 1,
       name: "Chaise Ergonomique Premium",
-      price: "299€",
+      price: 299,
       rating: 4.8,
       image: "🪑",
       description: "Confort maximal pour vos longues journées"
@@ -11,7 +11,7 @@ export default function Home() {
     {
       id: 2,
       name: "Chaise Design Moderne",
-      price: "199€",
+      price: 199,
       rating: 4.6,
       image: "🪑",
       description: "Élégance et praticité réunies"
@@ -19,7 +19,7 @@ export default function Home() {
     {
       id: 3,
       name: "Chaise Gaming Ultimate",
-      price: "349€",
+      price: 349,
       rating: 4.9,
       image: "🪑",
       description: "Performance et style pour les gamers"
@@ -27,42 +27,30 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-linear-to-r from-blue-50 to-indigo-50 text-foreground">
       {/* Header / Navigation */}
       <header className="border-b border-gray-700">
         <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="text-3xl font-bold text-orange-600">ChaiseHUB</div>
+          <div className="text-3xl font-bold text-accent-orange">ChaiseHUB</div>
           <div className="flex gap-8">
-            <a href="/" className="text-gray-300 hover:text-orange-600">Accueil</a>
-            <a href="/produits" className="text-gray-300 hover:text-orange-600">Produits</a>
-            <a href="#" className="text-gray-300 hover:text-orange-600">À propos</a>
+            <a href="/" className="text-mist-800 hover:text-accent-orange">Accueil</a>
+            <a href="/produits" className="text-mist-800 hover:text-accent-orange">Produits</a>
+            <a href="#" className="text-mist-800 hover:text-accent-orange">À propos</a>
           </div>
         </nav>
       </header>
 
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-5xl font-bold text-white mb-6">Bienvenue chez ChaiseHUB</h1>
-        <p className="text-2xl text-gray-400 mb-8">Les meilleures chaises pour votre confort</p>
+        <h1 className="text-5xl font-bold text-accent-orange mb-6">Bienvenue chez ChaiseHUB</h1>
+        <p className="text-2xl text-mist-800 mb-8">Les meilleures chaises pour votre confort</p>
         <div className="text-6xl mb-8">🪑</div>
       </section>
 
       <section className="bg-linear-to-r from-blue-50 to-indigo-50 py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">Notre Histoire</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center">
-              <div className="text-8xl mb-4">👨‍💼</div>
-              <h3 className="text-2xl font-bold text-white mb-2">Jean</h3>
-              <p className="text-gray-400">Expert en ergonomie et design</p>
-            </div>
-            <div className="text-center">
-              <div className="text-8xl mb-4">👨‍💻</div>
-              <h3 className="text-2xl font-bold text-white mb-2">Marc</h3>
-              <p className="text-gray-400">Passionné par l'innovation</p>
-            </div>
-          </div>
+          <h2 className="text-4xl font-bold text-center mb-12 text-accent-orange">Notre Histoire</h2>
           <div className="mt-12 bg-gray-800 rounded-lg p-8 shadow-md">
-            <p className="text-lg text-gray-300 text-center mb-4">
+            <p className="text-lg text-mist-300 text-center mb-4">
               C'est en 2025 que deux amis passionnés, <strong>Jean</strong> et <strong>Marc</strong>, 
               ont eu une idée révolutionnaire : créer un site offrant les meilleures chaises du marché 
               avec un service client incomparable.
@@ -76,44 +64,48 @@ export default function Home() {
       </section>
       
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-4xl font-bold text-center mb-4 text-white">Nos Meilleures Chaises</h2>
-        <p className="text-center text-gray-400 mb-12">Sélection premium de nos produits les plus appréciés</p>
+        <h2 className="text-4xl font-bold text-center mb-4 text-accent-orange">Nos Meilleures Chaises</h2>
+        <p className="text-center text-mist-800 mb-12">Sélection premium de nos produits les plus appréciés</p>
         
         <div className="grid md:grid-cols-3 gap-8">
           {topChairs.map((chair) => (
             <div 
               key={chair.id} 
-              className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-100"
             >
-              <div className="h-40 bg-gradient-to-br from-orange-900 to-orange-800 flex items-center justify-center">
+              <div className="h-40 bg-gradient-to-br from-accent-orange-dark to-accent-orange flex items-center justify-center">
                 <span className="text-6xl">{chair.image}</span>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2">{chair.name}</h3>
-                <p className="text-gray-400 text-sm mb-4">{chair.description}</p>
-                
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-2xl font-bold text-orange-600">{chair.price}€</span>
-                  <div className="flex items-center">
-                    <span className="text-yellow-500">⭐</span>
-                    <span className="ml-1 text-gray-300 font-semibold">{chair.rating}</span>
-                  </div>
+              <div className="p-6 flex flex-col justify-between h-60">
+                <div className="">
+
+                  <h3 className="text-xl font-bold text-white mb-2">{chair.name}</h3>
+                  <p className="text-gray-400 text-sm mb-4">{chair.description}</p>
+                  
                 </div>
-                
-                <button className="w-full bg-orange-600 text-white py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
-                  Ajouter au panier
-                </button>
+                <div className="">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-2xl font-bold text-accent-orange">{chair.price}€</span>
+                    <div className="flex items-center">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="ml-1 text-gray-300 font-semibold">{chair.rating}</span>
+                    </div>
+                  </div>
+                  <button className="w-full bg-accent-orange text-white py-2 rounded-lg font-semibold hover:bg-accent-orange-dark transition-colors">
+                    Ajouter au panier
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-orange-600 text-white py-16">
+      <section className="bg-accent-orange text-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-6">Découvrez Tous Nos Produits</h2>
-          <p className="text-xl mb-8 text-orange-100">Parcourez notre collection complète de chaises pour tous les budgets</p>
-          <a href="/produits" className="inline-block bg-white border-2 border-white text-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-orange-700 hover:text-white hover:cursor-pointer duration-500 transition-colors">
+          <p className="text-xl mb-8 text-accent-orange-100">Parcourez notre collection complète de chaises pour tous les budgets</p>
+          <a href="/produits" className="inline-block bg-white border-2 border-white text-accent-orange px-8 py-4 rounded-lg font-bold text-lg hover:bg-accent-orange-dark hover:text-white hover:cursor-pointer duration-500 transition-colors">
             Voir tous les produits
           </a>
         </div>

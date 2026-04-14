@@ -1,0 +1,42 @@
+services:
+  database:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./api_des_chaises
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: database       # nom du service Docker, pas localhost !
+      DB_PORT: 5432           # port interne Docker, pas 5959
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      NODE_ENV: production
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./chaise-hub
+    restart: unless-stopped
+    ports:
+      - "80:3000"             # Next.js prod tourne sur 3000, exposé sur le port 80
+    environment:
+      NEXT_PUBLIC_API_URL: ${API_URL}
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

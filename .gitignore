@@ -1,0 +1,12 @@
+# Env
+.env
+.env.local
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# Node
+node_modules/
+
+/.next/
