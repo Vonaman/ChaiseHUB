@@ -16,7 +16,7 @@ services:
       context: ./api_des_chaises
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       DB_HOST: database       # nom du service Docker, pas localhost !
       DB_PORT: 5432           # port interne Docker, pas 5959
@@ -32,7 +32,7 @@ services:
       context: ./chaise-hub
     restart: unless-stopped
     ports:
-      - "80:3000"             # Next.js prod tourne sur 3000, exposé sur le port 80
+      - "3000:3000"             # Next.js prod tourne sur 3000, exposé sur le port 80
     environment:
       NEXT_PUBLIC_API_URL: ${API_URL}
     depends_on:
