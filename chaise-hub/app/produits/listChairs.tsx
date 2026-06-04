@@ -10,7 +10,7 @@ export const ListChairs = ({ chairs }: { chairs: Chair[] }) => {
   const [priceRange, setPriceRange] = useState(500);
   const [sortBy, setSortBy] = useState("name");
 
-  const filteredChairs = chairs   // ← remplace allChairs par chairs
+  const filteredChairs = chairs
     .filter(chair => {
       const categoryMatch = selectedCategory === "Tous" || chair.category === selectedCategory;
       const priceMatch = chair.price <= priceRange;
