@@ -8,7 +8,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD || 'password',
   database: process.env.DB_NAME || 'api_chaises',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  // synchronize: process.env.NODE_ENV !== 'production', // Attention en production !
-  synchronize : true,
+  synchronize: process.env.NODE_ENV !== 'production', // Attention en production !
+  // synchronize: true,
   logging: process.env.DB_LOGGING === 'true',
 };
