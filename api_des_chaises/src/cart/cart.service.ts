@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Cart } from '../entities/cart.entity';
 import { CartItem } from '../entities/cart-item.entity';
 import { Chair } from '../entities/chair.entity';
+import { Account } from '../entities';
 
 @Injectable()
 export class CartService {
@@ -13,18 +14,17 @@ export class CartService {
     @InjectRepository(CartItem)
     private cartItemRepo: Repository<CartItem>,
     @InjectRepository(Chair)
-    private ChairRepo: Repository<Chair>,
+    private chairRepo: Repository<Chair>,
   ) {}
 
-  // Récupère le panier de l'account, le crée s'il n'existe pas encore
-  async getOrCreateCart(accountId: string): Promise<Cart> {
+  async getOrCreateCart(accountId: number): Promise<Cart> {
     let cart = await this.cartRepo.findOne({
       where: { account: { id: accountId } },
-      relations: ['items', 'items.Chair'],
+      relations: ['items', 'items.chair'],
     });
 
     if (!cart) {
-      cart = this.cartRepo.create({ account: { id: accountId } as any });
+      cart = this.cartRepo.create({ account: { id: accountId } as Account });
       cart = await this.cartRepo.save(cart);
       cart.items = [];
     }
@@ -32,26 +32,26 @@ export class CartService {
     return cart;
   }
 
-  async addItem(accountId: string, ChairId: string, quantity = 1): Promise<Cart> {
+  async addItem(accountId: number, chairId: number, quantity = 1): Promise<Cart> {
     const cart = await this.getOrCreateCart(accountId);
 
-    const Chair = await this.ChairRepo.findOneBy({ id: ChairId });
-    if (!Chair) throw new NotFoundException('Chaise introuvable');
+    const chair = await this.chairRepo.findOneBy({ id: chairId });
+    if (!chair) throw new NotFoundException('Chaise introuvable');
 
-    let item = cart.items.find((i) => i.Chair.id === ChairId);
+    let item = cart.items.find((i) => i.chair.id === chairId);
 
     if (item) {
       item.quantity += quantity;
       await this.cartItemRepo.save(item);
     } else {
-      item = this.cartItemRepo.create({ cart, Chair, quantity });
+      item = this.cartItemRepo.create({ cart, chair, quantity });
       await this.cartItemRepo.save(item);
     }
 
     return this.getOrCreateCart(accountId);
   }
 
-  async updateItemQuantity(accountId: string, itemId: string, quantity: number): Promise<Cart> {
+  async updateItemQuantity(accountId: number, itemId: number, quantity: number): Promise<Cart> {
     const item = await this.cartItemRepo.findOne({
       where: { id: itemId },
       relations: ['cart', 'cart.account'],
@@ -67,7 +67,7 @@ export class CartService {
     return this.getOrCreateCart(accountId);
   }
 
-  async removeItem(accountId: string, itemId: string): Promise<Cart> {
+  async removeItem(accountId: number, itemId: number): Promise<Cart> {
     const item = await this.cartItemRepo.findOne({
       where: { id: itemId },
       relations: ['cart', 'cart.account'],

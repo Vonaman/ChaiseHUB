@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ chair, onAddToCart }: ProductCardProps) => {
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+    <div className="bg-gray-100 border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
       {/* Image Container */}
       <div className="h-48 bg-gradient-to-br from-accent-orange-dark to-accent-orange flex items-center justify-center relative">
         {/* <span className="text-7xl">{chair.image}</span> */}
@@ -26,10 +26,10 @@ export const ProductCard = ({ chair, onAddToCart }: ProductCardProps) => {
       {/* Content */}
       <div className="p-6">
         {/* Name */}
-        <h3 className="text-xl font-bold text-white mb-2">{chair.name}</h3>
+        <h3 className="text-xl font-bold text-black mb-2">{chair.name}</h3>
 
         {/* Description */}
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2">{chair.description}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{chair.description}</p>
 
         {/* Price & Rating */}
         <div className="flex justify-between items-center mb-4">

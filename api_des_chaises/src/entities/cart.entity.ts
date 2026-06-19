@@ -1,18 +1,11 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
-import { Account } from '../account';
+import { Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Account } from './account.entity';
 import { CartItem } from './cart-item.entity';
-
 
 @Entity()
 export class Cart {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @OneToOne(() => Account, (account) => account.cart, { onDelete: 'CASCADE' })
   @JoinColumn()

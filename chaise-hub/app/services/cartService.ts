@@ -10,7 +10,7 @@ export async function getCart(token: string) {
   return res.json();
 }
 
-export async function addToCart(token: string, chaiseId: string, quantity = 1) {
+export async function addToCart(token: string, chaiseId: number, quantity = 1) {
   const res = await fetch(`${API_URL}/cart/items`, {
     method: 'POST',
     headers: {

@@ -23,14 +23,8 @@ export const HeaderLight = ({ theme = 'light' }: HeaderProps) => {
           ChaiseHUB
         </Link>
         <div className="flex gap-8 items-center">
-          <Link href="/" className={`${isDark ? 'text-gray-300' : 'text-gray-900'} hover:text-accent-orange`}>
-            Accueil
-          </Link>
           <Link href="/produits" className={`${isDark ? 'text-gray-300' : 'text-gray-900'} hover:text-accent-orange`}>
             Produits
-          </Link>
-          <Link href="#" className={`${isDark ? 'text-gray-300' : 'text-gray-900'} hover:text-accent-orange`}>
-            À propos
           </Link>
 
           {/* Account Icon */}

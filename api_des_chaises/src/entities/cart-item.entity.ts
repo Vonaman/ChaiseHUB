@@ -12,8 +12,8 @@ import { Chair } from './chair.entity';
 
 @Entity()
 export class CartItem {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn() // <- number, pas uuid, pour rester cohérent avec Account/Chair
+  id: number;
 
   @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
   cart: Cart;

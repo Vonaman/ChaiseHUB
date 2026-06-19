@@ -245,7 +245,7 @@ export default function AuthPage() {
       {/* Footer */}
       <footer className="bg-gray-100 text-gray-600 py-8 border-t border-gray-300">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p>&copy; 2025 ChaiseHUB. Créé par Jean et Marc avec ❤️</p>
+          <p>&copy; 2025 ChaiseHUB. Créé par Jean et Marc</p>
         </div>
       </footer>
     </div>

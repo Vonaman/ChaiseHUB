@@ -10,14 +10,8 @@ export const Header = () => {
           ChaiseHUB
         </Link>
         <div className="flex gap-8 items-center">
-          <Link href="/" className="text-gray-300 hover:text-accent-orange">
-            Accueil
-          </Link>
           <Link href="/produits" className="text-gray-300 hover:text-accent-orange">
             Produits
-          </Link>
-          <Link href="#" className="text-gray-300 hover:text-accent-orange">
-            À propos
           </Link>
 
           {/* Account Icon */}

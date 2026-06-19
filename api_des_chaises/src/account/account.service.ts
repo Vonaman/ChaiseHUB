@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Account } from '../entities';
+import * as bcrypt from 'bcrypt';
 
 const defaultAccounts: Omit<Account, 'id' | 'createdAt' | 'updatedAt'>[] = [
   {
@@ -88,10 +89,15 @@ export class AccountService implements OnModuleInit {
 
   private async seedDefaultAccounts(): Promise<void> {
     const count = await this.accountRepository.count();
-    if (count > 0) {
-      return;
-    }
+    if (count > 0) return;
 
-    await this.accountRepository.save(defaultAccounts);
+    const hashedAccounts = await Promise.all(
+      defaultAccounts.map(async (acc) => ({
+        ...acc,
+        passwordHash: await bcrypt.hash(acc.passwordHash, 10),
+      })),
+    );
+
+    await this.accountRepository.save(hashedAccounts);
   }
 }

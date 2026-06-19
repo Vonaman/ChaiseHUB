@@ -23,13 +23,13 @@ export default async function Home() {
       <section className="bg-linear-to-r from-blue-50 to-indigo-50 py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12 text-accent-orange">Notre Histoire</h2>
-          <div className="mt-12 bg-gray-800 rounded-lg p-8 shadow-md">
-            <p className="text-lg text-mist-300 text-center mb-4">
+          <div className="mt-12 bg-blue-50 rounded-lg p-8 shadow-md">
+            <p className="text-lg text-mist-700 text-center mb-4">
               C'est en 2025 que deux amis passionnés, <strong>Jean</strong> et <strong>Marc</strong>, 
               ont eu une idée révolutionnaire : créer un site offrant les meilleures chaises du marché 
               avec un service client incomparable.
             </p>
-            <p className="text-lg text-gray-300 text-center">
+            <p className="text-lg text-gray-700 text-center">
               Leur mission ? Transformer chaque moment assis en une expérience de confort premium. 
               Chez ChaiseHUB, nous croyons que tout le monde mérite une bonne chaise.
             </p>
@@ -61,7 +61,7 @@ export default async function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-8">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p>&copy; 2025 ChaiseHUB. Créé par Jean et Marc avec ❤️</p>
+          <p>&copy; 2025 ChaiseHUB. Créé par Jean et Marc avec amour</p>
         </div>
       </footer>
     </div>

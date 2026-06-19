@@ -29,7 +29,7 @@ export class Account {
   isActive: boolean;
 
   @OneToOne(() => Cart, (cart) => cart.account, { cascade: true })
-  cart: Cart;
+  cart?: Cart;
 
   @CreateDateColumn()
   createdAt: Date;
