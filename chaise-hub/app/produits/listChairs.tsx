@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { Chair } from '../services/chairService';
+import { ProductCard } from '../components/ProductCard';
+import { HeaderLight } from '../components/HeaderLight';
 
 export const ListChairs = ({ chairs }: { chairs: Chair[] }) => {
   const categories = ["Tous", "Ergonomique", "Gaming", "Design", "Bureau", "Cuisine", "Relaxation", "Classique", "Enfant"];
@@ -26,17 +28,7 @@ export const ListChairs = ({ chairs }: { chairs: Chair[] }) => {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Header / Navigation */}
-      <header className="border-b border-gray-700">
-        <nav className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-          <a href="/" className="text-3xl font-bold text-accent-orange hover:opacity-80">ChaiseHUB</a>
-          <div className="flex gap-8">
-            <a href="/" className="text-gray-300 hover:text-accent-orange">Accueil</a>
-            <a href="/produits" className="text-gray-300 hover:text-accent-orange font-semibold text-accent-orange">Produits</a>
-            <a href="#" className="text-gray-300 hover:text-accent-orange">À propos</a>
-          </div>
-        </nav>
-      </header>
+      <HeaderLight theme="dark" />
 
       {/* Page Title */}
       <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
@@ -124,36 +116,7 @@ export const ListChairs = ({ chairs }: { chairs: Chair[] }) => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {filteredChairs.map((chair) => (
-                <div
-                  key={chair.id}
-                  className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                >
-                  <div className="h-48 bg-gradient-to-br from-accent-orange-dark to-accent-orange flex items-center justify-center relative">
-                    <span className="text-7xl">{chair.image}</span>
-                    <div className="absolute top-3 right-3 bg-accent-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      {chair.category}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">{chair.name}</h3>
-                    <p className="text-gray-400 text-sm mb-4">{chair.description}</p>
-
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-3xl font-bold text-accent-orange">{chair.price}€</span>
-                      <div className="flex items-center bg-accent-orange-dark px-3 py-1 rounded-full">
-                        <span className="text-yellow-500 text-lg">⭐</span>
-                        <span className="ml-1 text-white font-semibold">{chair.rating}</span>
-                      </div>
-                    </div>
-
-                    <button className="w-full bg-accent-orange text-white py-3 rounded-lg font-semibold hover:bg-accent-orange-dark transition-colors mb-2">
-                      Ajouter au panier
-                    </button>
-                    <a href={`/produits/${chair.id}`} className="block w-full border-2 border-accent-orange text-accent-orange text-center py-2 rounded-lg font-semibold hover:bg-accent-orange hover:text-white transition-colors">
-                      Détails
-                    </a>
-                  </div>
-                </div>
+                <ProductCard key={chair.id} chair={chair} />
               ))}
             </div>
           )}

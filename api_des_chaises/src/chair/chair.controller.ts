@@ -9,6 +9,7 @@ import {
   HttpCode,
   HttpStatus,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { ChairService } from './chair.service';
 import { Chair } from '../entities';
@@ -30,7 +31,11 @@ export class ChairController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Chair> {
-    const chair = await this.chairService.findOne(Number(id));
+    const numId = Number(id);
+    if (!Number.isInteger(numId) || numId <= 0) {
+      throw new BadRequestException(`ID invalide: ${id}`);
+    }
+    const chair = await this.chairService.findOne(numId);
     if (!chair) {
       throw new NotFoundException(`Chaise avec l'ID ${id} non trouvée`);
     }
@@ -42,7 +47,11 @@ export class ChairController {
     @Param('id') id: string,
     @Body() updateChairDto: Partial<Chair>,
   ): Promise<Chair> {
-    const updatedChair = await this.chairService.update(Number(id), updateChairDto);
+    const numId = Number(id);
+    if (!Number.isInteger(numId) || numId <= 0) {
+      throw new BadRequestException(`ID invalide: ${id}`);
+    }
+    const updatedChair = await this.chairService.update(numId, updateChairDto);
     if (!updatedChair) {
       throw new NotFoundException(`Chaise avec l'ID ${id} non trouvée`);
     }
@@ -52,7 +61,11 @@ export class ChairController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string): Promise<void> {
-    const success = await this.chairService.remove(Number(id));
+    const numId = Number(id);
+    if (!Number.isInteger(numId) || numId <= 0) {
+      throw new BadRequestException(`ID invalide: ${id}`);
+    }
+    const success = await this.chairService.remove(numId);
     if (!success) {
       throw new NotFoundException(`Chaise avec l'ID ${id} non trouvée`);
     }

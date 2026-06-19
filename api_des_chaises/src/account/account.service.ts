@@ -74,6 +74,18 @@ export class AccountService implements OnModuleInit {
     return (result.affected ?? 0) > 0;
   }
 
+  async login(email: string, password: string): Promise<Account | null> {
+    const account = await this.accountRepository.findOneBy({ email });
+    if (!account) {
+      return null;
+    }
+    // Simple password check (in production, use bcrypt)
+    if (account.passwordHash !== password) {
+      return null;
+    }
+    return account;
+  }
+
   private async seedDefaultAccounts(): Promise<void> {
     const count = await this.accountRepository.count();
     if (count > 0) {

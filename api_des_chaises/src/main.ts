@@ -8,9 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:8080', // port de Next.js
+    //origin: process.env.FRONTEND_URL || 'http://localhost:8080', // port de Next.js
     //origin: 'https://vonaman.fr',
-    credentials: true,
+    origin: '*', // Autoriser toutes les origines pour le développement
+    // credentials: true,
   });
 
   await app.listen(process.env.PORT ?? 3000);

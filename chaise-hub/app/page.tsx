@@ -1,44 +1,18 @@
-export default function Home() {
-  const topChairs = [
-    {
-      id: 1,
-      name: "Chaise Ergonomique Premium",
-      price: 299,
-      rating: 4.8,
-      image: "🪑",
-      description: "Confort maximal pour vos longues journées"
-    },
-    {
-      id: 2,
-      name: "Chaise Design Moderne",
-      price: 199,
-      rating: 4.6,
-      image: "🪑",
-      description: "Élégance et praticité réunies"
-    },
-    {
-      id: 3,
-      name: "Chaise Gaming Ultimate",
-      price: 349,
-      rating: 4.9,
-      image: "🪑",
-      description: "Performance et style pour les gamers"
-    }
-  ];
+import { ProductCard } from './components/ProductCard';
+import { getAllChairs } from './services/chairService';
+import { HeaderLight } from './components/HeaderLight';
+
+export default async function Home() {
+  const chairs = await getAllChairs();
+  
+  // Récupérer les 3 meilleures chaises par rating
+  const topChairs = chairs
+    .sort((a: any, b: any) => b.rating - a.rating)
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-linear-to-r from-blue-50 to-indigo-50 text-foreground">
-      {/* Header / Navigation */}
-      <header className="border-b border-gray-700">
-        <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="text-3xl font-bold text-accent-orange">ChaiseHUB</div>
-          <div className="flex gap-8">
-            <a href="/" className="text-mist-800 hover:text-accent-orange">Accueil</a>
-            <a href="/produits" className="text-mist-800 hover:text-accent-orange">Produits</a>
-            <a href="#" className="text-mist-800 hover:text-accent-orange">À propos</a>
-          </div>
-        </nav>
-      </header>
+      <HeaderLight theme="light" />
 
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
         <h1 className="text-5xl font-bold text-accent-orange mb-6">Bienvenue chez ChaiseHUB</h1>
@@ -69,34 +43,7 @@ export default function Home() {
         
         <div className="grid md:grid-cols-3 gap-8">
           {topChairs.map((chair) => (
-            <div 
-              key={chair.id} 
-              className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-100"
-            >
-              <div className="h-40 bg-gradient-to-br from-accent-orange-dark to-accent-orange flex items-center justify-center">
-                <span className="text-6xl">{chair.image}</span>
-              </div>
-              <div className="p-6 flex flex-col justify-between h-60">
-                <div className="">
-
-                  <h3 className="text-xl font-bold text-white mb-2">{chair.name}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{chair.description}</p>
-                  
-                </div>
-                <div className="">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-2xl font-bold text-accent-orange">{chair.price}€</span>
-                    <div className="flex items-center">
-                      <span className="text-yellow-500">⭐</span>
-                      <span className="ml-1 text-gray-300 font-semibold">{chair.rating}</span>
-                    </div>
-                  </div>
-                  <button className="w-full bg-accent-orange text-white py-2 rounded-lg font-semibold hover:bg-accent-orange-dark transition-colors">
-                    Ajouter au panier
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ProductCard key={chair.id} chair={chair} />
           ))}
         </div>
       </section>
